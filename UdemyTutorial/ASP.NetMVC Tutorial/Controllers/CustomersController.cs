@@ -20,6 +20,11 @@ namespace ASP.NetMVC_Tutorial.Controllers
             _context.Dispose();
         }
 
+        public ActionResult CustomerForm()
+        {
+            return View();
+        }
+
         // GET: Customers
         public ActionResult Index()
         {

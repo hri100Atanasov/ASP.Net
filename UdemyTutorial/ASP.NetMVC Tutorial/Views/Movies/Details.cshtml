@@ -1,0 +1,14 @@
+﻿@using System.Globalization
+@model ASP.NetMVC_Tutorial.Models.Movie
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>@Model.Genre</h4>  
+<ul>
+    <li>Genre: @Model.Genre</li>
+    <li>Release Date: @Model.ReleaseDate.ToString("dddd, MMMM d, yyyy", CultureInfo.InvariantCulture)</li>
+    <li>Date Added: @Model.DateAdded.ToString("dddd, MMMM d, yyyy", CultureInfo.InvariantCulture)</li>
+    <li>Number in Stock: @Model.NumberInStock</li>
+</ul>
+           

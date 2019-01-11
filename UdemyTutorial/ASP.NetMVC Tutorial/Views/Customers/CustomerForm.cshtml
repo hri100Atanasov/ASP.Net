@@ -1,0 +1,24 @@
+﻿@model ASP.NetMVC_Tutorial.Models.Customer
+@{
+    ViewBag.Title = "CustomerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+@using (Html.BeginForm("Create", "Customers"))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => c.Name)
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c=>c.BirthDate)
+        @Html.TextBoxFor(c=>c.BirthDate, new { @class = "form-control"})
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(c=>c.IsSubscribedToNewsletter) Subscribe to Newsletter?
+        </label>
+    </div>
+}
+
