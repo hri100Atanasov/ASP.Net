@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+<h3>Customers</h3>
+<p>
+    @Html.ActionLink("NEW CUSTOMER", "CustomerForm", "Movies", new { @class = "btn btn-primary" })
+</p>
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -15,7 +19,7 @@
         @foreach (var customer in Model)
         {
             <tr>
-                <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id=customer.Id }, null)</td>
+                <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
                 <td>@customer.MembershipType.Name</td>
             </tr>
         }

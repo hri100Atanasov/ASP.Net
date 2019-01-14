@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+<h3>Movies</h3>
+<p>
+    @Html.ActionLink("NEW MOVIE", "MovieForm", "Movies", new { @class = "btn btn-primary"})
+</p>
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -15,8 +19,8 @@
         @foreach (var movie in Model)
         {
             <tr>
-                <td>@Html.ActionLink(movie.Name, "Details", "Movies", new { id=movie.Id}, null)</td>
-                <td>@movie.Genre</td>
+                <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+                <td>@Html.DisplayFor(modelItem=>movie.Genre.Name)</td>
             </tr>
         }
     </tbody>
