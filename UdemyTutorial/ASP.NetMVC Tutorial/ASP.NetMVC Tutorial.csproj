@@ -253,6 +253,14 @@
     <Compile Include="Migrations\201901141642229_AddedPropertyGenreToMovie.Designer.cs">
       <DependentUpon>201901141642229_AddedPropertyGenreToMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901142147244_RemovedRequiredAttributeFromGenreName.cs" />
+    <Compile Include="Migrations\201901142147244_RemovedRequiredAttributeFromGenreName.Designer.cs">
+      <DependentUpon>201901142147244_RemovedRequiredAttributeFromGenreName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901151159099_MoviePropertiesModifiedWithAttributes.cs" />
+    <Compile Include="Migrations\201901151159099_MoviePropertiesModifiedWithAttributes.Designer.cs">
+      <DependentUpon>201901151159099_MoviePropertiesModifiedWithAttributes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -261,6 +269,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\ValidateCustomerAge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\NewCustomerViewModel.cs" />
@@ -390,6 +399,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901141642229_AddedPropertyGenreToMovie.resx">
       <DependentUpon>201901141642229_AddedPropertyGenreToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901142147244_RemovedRequiredAttributeFromGenreName.resx">
+      <DependentUpon>201901142147244_RemovedRequiredAttributeFromGenreName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901151159099_MoviePropertiesModifiedWithAttributes.resx">
+      <DependentUpon>201901151159099_MoviePropertiesModifiedWithAttributes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

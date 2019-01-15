@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace ASP.NetMVC_Tutorial.Models
 {
+    [Bind(Exclude = "Id")]
     public class Customer
     {
         public int Id { get; set; }
@@ -22,6 +21,7 @@ namespace ASP.NetMVC_Tutorial.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name = "Date of birth")]
+        [ValidateCustomerAge]
         public DateTime? BirthDate { get; set; }
     }
 }

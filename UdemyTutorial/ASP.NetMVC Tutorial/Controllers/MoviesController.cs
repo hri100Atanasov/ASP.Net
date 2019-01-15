@@ -24,7 +24,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
         // GET: Movies
         public  ActionResult Index()
         {
-            var movies = _contex.Movies.Include(m=>m.Genre).ToList();
+            var movies = _contex.Movies.Include(g=>g.Genre).ToList();
 
             return View(movies);
         }
@@ -53,6 +53,9 @@ namespace ASP.NetMVC_Tutorial.Controllers
         {
             if (movie.Id == 0)
             {
+                var errors = ModelState.Values.Select(e => e.Errors).ToList();
+                var genre = _contex.Genres.Single(g => g.Id == movie.GenreId);
+                movie.Genre = genre;
                 _contex.Movies.Add(movie);
             }
             else
