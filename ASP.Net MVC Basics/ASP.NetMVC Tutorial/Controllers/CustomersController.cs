@@ -86,8 +86,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            List<Customer> customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
+            return View();
         }
 
         //public ActionResult Details(int id)
