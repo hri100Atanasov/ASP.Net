@@ -1,9 +1,7 @@
 ﻿using ASP.NetMVC_Tutorial.Models;
 using ASP.NetMVC_Tutorial.ViewModels;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Data.Entity;
 
 namespace ASP.NetMVC_Tutorial.Controllers
 {
@@ -21,12 +19,19 @@ namespace ASP.NetMVC_Tutorial.Controllers
             _contex.Dispose();
         }
 
-        // GET: Movies
-        public  ActionResult Index()
-        {
-            var movies = _contex.Movies.Include(g=>g.Genre).ToList();
 
-            return View(movies);
+        // GET: Movies
+       // [Authorize(Roles = Roles.CanManageMovies)]
+        public ActionResult Index()
+        {
+            if (User.IsInRole(Roles.CanManageMovies))
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View("ReadOnlyLIst");
+            }
         }
 
         //public async Task<ActionResult> Details(int id)
@@ -36,6 +41,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
         //    return await Task.Run(() => View(movie));
         //}
 
+        [Authorize(Roles = Roles.CanManageMovies)]
         public ActionResult MovieForm()
         {
             var genres = _contex.Genres.ToList();
@@ -49,6 +55,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
@@ -71,6 +78,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
             return RedirectToAction("Index", "Movies");
         }
 
+        [Authorize(Roles = Roles.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movei = _contex.Movies.Single(m => m.Id == id);

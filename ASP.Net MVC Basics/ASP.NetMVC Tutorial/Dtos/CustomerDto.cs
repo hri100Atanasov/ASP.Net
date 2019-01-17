@@ -19,6 +19,8 @@ namespace ASP.NetMVC_Tutorial.Dtos
 
         public byte MembershipTypeId { get; set; }
 
+        public MembershipTypeDto MembershipType { get; set; }
+
         //[ValidateCustomerAge]
         public DateTime? BirthDate { get; set; }
     }

@@ -16,6 +16,8 @@ namespace ASP.NetMVC_Tutorial.Dtos
 
         public byte GenreId { get; set; }
 
+        public GenreDto Genre { get; set; }
+
         [Required]
         public DateTime ReleaseDate { get; set; }
 

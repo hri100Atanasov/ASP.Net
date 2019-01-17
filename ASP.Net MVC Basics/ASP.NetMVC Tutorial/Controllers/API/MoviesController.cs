@@ -3,6 +3,7 @@ using ASP.NetMVC_Tutorial.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -21,7 +22,8 @@ namespace ASP.NetMVC_Tutorial.Controllers.API
         [HttpGet]
         public IEnumerable<MovieDto> GetMovies()
         {
-            return _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+                return _context.Movies.Include(m => m.Genre)
+                    .ToList().Select(Mapper.Map<Movie, MovieDto>);
         }
 
         [HttpGet]
@@ -32,6 +34,7 @@ namespace ASP.NetMVC_Tutorial.Controllers.API
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.CanManageMovies)]
         public IHttpActionResult CreateMovie(MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -50,6 +53,7 @@ namespace ASP.NetMVC_Tutorial.Controllers.API
         }
 
         [HttpPut]
+        [Authorize(Roles = Roles.CanManageMovies)]
         public void UpdateMovie(int id, MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -69,10 +73,11 @@ namespace ASP.NetMVC_Tutorial.Controllers.API
         }
 
         [HttpDelete]
+        [Authorize(Roles = Roles.CanManageMovies)]
         public void DeleteMovie(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
-            if (movie==null)
+            if (movie == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }

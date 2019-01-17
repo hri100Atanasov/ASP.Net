@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ASP.NetMVC_Tutorial.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ASP.NetMVC_Tutorial.Controllers
 {
@@ -151,10 +152,22 @@ namespace ASP.NetMVC_Tutorial.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    DrivingLicense = model.DrivingLicense,
+                    Phone = model.Phone
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Temp code for creating admin role
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManagere = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManagere.CreateAsync(new IdentityRole("CanManageMovies"));
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -163,7 +176,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Movies");
                 }
                 AddErrors(result);
             }
@@ -367,7 +380,12 @@ namespace ASP.NetMVC_Tutorial.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    DrivingLicense = model.DrivingLicense,
+                    Phone = model.Phone
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -392,7 +410,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Movies");
         }
 
         //
@@ -449,7 +467,7 @@ namespace ASP.NetMVC_Tutorial.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Movies");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
