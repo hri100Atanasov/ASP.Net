@@ -56,7 +56,7 @@ namespace ASP.NetMVC_Tutorial
 
             app.UseFacebookAuthentication(
                appId: "365238544276039",
-               appSecret: "59d7a857ab70c6c6640fe51684d7be4e");
+               appSecret: "xxxx");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
